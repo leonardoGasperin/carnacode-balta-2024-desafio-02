@@ -19,7 +19,7 @@ window.checkingRecuperarLoginForms = function () {
         alert("Por favor, preencha todos os campos.");
     }
     else {
-        window.location.href = '/pages/login.html'
+        window.location.href = '/'
     }
 }
 
@@ -31,6 +31,6 @@ window.checkingCadastroForms = function () {
         alert("Por favor, preencha todos os campos.");
     }
     else {
-        window.location.href = '/pages/login.html'
+        window.location.href = '/calculadora'
     }
 }
