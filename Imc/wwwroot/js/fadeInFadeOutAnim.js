@@ -1,5 +1,5 @@
-window.fadeOutAndShowMainContent = function () {
-    let elemento = document.getElementById('centralizarSplash');
+window.fadeOutAndShowMainContent = function (fadeOutElement, fadeInElement) {
+    let elemento = document.getElementById(fadeOutElement);
 
     let tempoFadeOut = 2000;
 
@@ -7,7 +7,7 @@ window.fadeOutAndShowMainContent = function () {
         elemento.style.opacity = '0';
 
         setTimeout(function () {
-            let conteudoPrincipal = document.getElementById('conteudoPrincipal');
+            let conteudoPrincipal = document.getElementById(fadeInElement);
             conteudoPrincipal.style.display = 'flex';
             
             setTimeout(function () {
