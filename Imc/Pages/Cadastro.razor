@@ -1,4 +1,5 @@
 ﻿@page "/cadastro"
+@inject IJSRuntime JSRuntime
 <PageTitle>Cadastro</PageTitle>
 
 <section class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
@@ -24,10 +25,13 @@
         <span>Não sou um robô.</span>
     </div>
     <div class="horizontalDivisor"></div>
-    <button class="btn btnPrimary" onclick="checking()">Criar Conta</button>
+    <button class="btn btnPrimary" @onclick="Checking">Criar Conta</button>
     <button class="btn btnSecondary" onclick="window.location.href='/'">Voltar</button>
 </section>
 
 @code {
-
+    private async Task Checking()
+    {
+        await JSRuntime.InvokeVoidAsync("checkingCadastroForms");
+    }
 }

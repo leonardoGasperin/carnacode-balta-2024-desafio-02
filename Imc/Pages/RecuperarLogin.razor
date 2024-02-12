@@ -1,4 +1,5 @@
 ﻿@page "/recuperarLogin"
+@inject IJSRuntime JSRuntime
 <PageTitle>RecuperarLogin</PageTitle>
 
 <section class="principalContainer principalContainerBigScreen principalContainerSmallScreen" >
@@ -15,11 +16,14 @@
         <span>Não sou um robô.</span>
     </div>
     <div class="horizontalDivisor"></div>
-    <button class="btn btnPrimary" onclick="checking()">Recuperar Login</button>
+    <button class="btn btnPrimary" @onclick="Checking">Recuperar Login</button>
     <button class="btn btnSecondary" onclick="window.location.href='/cadastro'">Não tenho um acesso</button>
     <button class="btn btnSecondary" onclick="window.location.href='/'">Voltar</button>
 </section>
 
 @code {
-
+    private async Task Checking()
+    {
+        await JSRuntime.InvokeVoidAsync("checkingRecuperarLoginForms");
+    }
 }
