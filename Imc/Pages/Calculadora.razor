@@ -45,7 +45,8 @@
 
     private async Task CalculadoraImc()
     {
-        string result = await JSRuntime.InvokeAsync<string>("calcularImc", Altura, Peso, Sexo, isIdoso);
+        float imcValor = await JSRuntime.InvokeAsync<float>("calcularImc", Altura, Peso);
+        string result = await JSRuntime.InvokeAsync<string>("imcResultado", imcValor, isIdoso, Sexo);
         _messageType = Enum.Parse<ResultadoImcModal.TipoMensagem>(result);
         await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent", "calculadora", "imcResultadoModal");
         _showModal = true;

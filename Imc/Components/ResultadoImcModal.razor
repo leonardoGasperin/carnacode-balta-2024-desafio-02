@@ -26,7 +26,7 @@
     }
     <div class="horizontalDivisor"></div>
     <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
-    <button class="btn btnSecondary" @onclick="GoToHistory">Ver meu histórico</button>
+    <button class="btn btnSecondary" onclick="window.location.href='/historico'">Ver meu histórico</button>
     <button class="btn btnSecondary" onclick="window.location.href='/calculadora'">Voltar</button>
 </section>
 
@@ -36,11 +36,6 @@
     private void RegisterMeasures()
     {
         // Lógica para registrar medidas
-    }
-
-    private void GoToHistory()
-    {
-        // Lógica para ir para o histórico
     }
 
     public enum TipoMensagem

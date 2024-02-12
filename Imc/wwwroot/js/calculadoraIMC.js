@@ -1,6 +1,8 @@
-window.calcularImc = function (altura, peso, sexo, isIdoso) {
-    const imcValor = peso / (altura * altura);
+window.calcularImc = function (altura, peso, sexo) {
+    return peso / (altura * altura);
+}
 
+window.imcResultado = function (imcValor, isIdoso, sexo) {
     switch (isIdoso) {
         case true:
             if (sexo === 'masculino') {
