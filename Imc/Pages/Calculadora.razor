@@ -5,7 +5,7 @@
 
 <PageTitle>Calculadora</PageTitle>
 
-<section id="calculadora" class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
+<section id="calculadora" class="elementToFadeOut principalContainer principalContainerBigScreen principalContainerSmallScreen">
     <h1 class="h1 h1Small">Cálculo de IMC</h1>
     <br>
     <div class="inputSmallScreenContainer">
@@ -47,6 +47,7 @@
     {
         string result = await JSRuntime.InvokeAsync<string>("calcularImc", Altura, Peso, Sexo, isIdoso);
         _messageType = Enum.Parse<ResultadoImcModal.TipoMensagem>(result);
+        await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent", "calculadora", "imcResultadoModal");
         _showModal = true;
     }
 }

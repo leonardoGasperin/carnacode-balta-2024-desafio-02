@@ -1,6 +1,6 @@
 ﻿@namespace ImcResultadoModal
 
-<section id="imcResultadoModal" class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
+<section id="imcResultadoModal" class="elementToFadeOut principalContainer principalContainerBigScreen principalContainerSmallScreen">
     @switch (MessagemSelecionada)
     {
         case TipoMensagem.AbaixoDoPeso:
@@ -27,6 +27,7 @@
     <div class="horizontalDivisor"></div>
     <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
     <button class="btn btnSecondary" @onclick="GoToHistory">Ver meu histórico</button>
+    <button class="btn btnSecondary" onclick="window.location.href='/calculadora'">Voltar</button>
 </section>
 
 @code {
