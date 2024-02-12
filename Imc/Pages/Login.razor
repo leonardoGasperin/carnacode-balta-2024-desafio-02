@@ -2,8 +2,8 @@
 @inject IJSRuntime JSRuntime
 <PageTitle>Login</PageTitle>
 
-<img id="centralizarSplash" width="250" height="250" src="/icon.png" />
-<section id="conteudoPrincipal" class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
+<img id="loginSplash" class="centralizarElement elementToFadeOut" width="250" height="250" src="/icon.png" />
+<section id="conteudoPrincipal" class="elementToFadeIn principalContainer principalContainerBigScreen principalContainerSmallScreen">
     <h1 class="h1 h1Small">Faça seu Login</h1>
     <span class="descricaoTela">
         Insira suas informações antes de medir seu IMC
@@ -30,7 +30,7 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent");
+            await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent", "loginSplash", "conteudoPrincipal");
         }
     }
 
