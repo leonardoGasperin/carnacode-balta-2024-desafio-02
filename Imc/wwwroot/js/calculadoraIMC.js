@@ -4,16 +4,16 @@ window.calcularImc = function (altura, peso, sexo, isIdoso) {
     switch (isIdoso) {
         case true:
             if (sexo === 'masculino') {
-                resultadoMasculinoIdoso(imcValor);
+                return resultadoMasculinoIdoso(imcValor);
             } else if (sexo === 'feminino') {
-                resultadoFemininoIdosa(imcValor);
+                return resultadoFemininoIdosa(imcValor);
             }
             break;
         case false:
             if (sexo === 'masculino') {
-                resultadoMasculino(imcValor);
+                return resultadoMasculino(imcValor);
             } else if (sexo === 'feminino') {
-                resultadoFeminino(imcValor);
+                return resultadoFeminino(imcValor);
             }
             break;
         default:
@@ -23,55 +23,55 @@ window.calcularImc = function (altura, peso, sexo, isIdoso) {
 
 function resultadoMasculino(imcValor) {
     if (imcValor < 18.5) {
-        console.log("Abaixo do peso");
+        return 'AbaixoDoPeso';
     } else if (imcValor >= 18.5 && imcValor < 25) {
-        console.log("Peso normal");
+        return 'PesoNormal';
     } else if (imcValor >= 25 && imcValor < 29.9) {
-        console.log("Sobrepeso");
+        return 'Sobrepeso';
     } else if (imcValor >= 29.9) {
-        console.log("Obesidade");
+        return 'Obesidade';
     } else {
-        console.log("Valor de IMC inválido");
+        return 'Invalido';
     }
 }
 
 function resultadoMasculinoIdoso(imcValor) {
     if (imcValor < 23) {
-        console.log("Abaixo do peso");
+        return 'AbaixoDoPeso';
     } else if (imcValor >= 23 && imcValor < 29.9) {
-        console.log("Peso normal");
+        return 'PesoNormal';
     } else if (imcValor >= 29.9) {
-        console.log("Sobrepeso/Obesidade");
+        return 'Obesidade';
     } else {
-        console.log("Valor de IMC inválido");
+        return 'Invalido';
     }
     
 }
 
 function resultadoFeminino(imcValor) {
     if (imcValor < 19.1) {
-        console.log("Abaixo do peso");
+        return 'AbaixoDoPeso';
     } else if (imcValor >= 19.1 && imcValor < 25.8) {
-        console.log("Peso normal");
+        return 'PesoNormal';
     } else if (imcValor >= 25.8 && imcValor < 27.3) {
-        console.log("Sobrepeso");
+        return 'Sobrepeso';
     } else if (imcValor >= 27.3) {
-        console.log("Obesidade");
+        return 'Obesidade';
     } else {
-        console.log("Valor de IMC inválido");
+        return 'Invalido';
     }
 }
 
 function resultadoFemininoIdosa(imcValor) {
     if (imcValor < 17) {
-        console.log("Abaixo do peso");
+        return 'AbaixoDoPeso';
     } else if (imcValor >= 17 && imcValor < 24.4) {
-        console.log("Peso normal");
+        return 'PesoNormal';
     } else if (imcValor >= 24.4 && imcValor < 28.9) {
-        console.log("Sobrepeso");
+        return 'Sobrepeso';
     } else if (imcValor >= 29) {
-        console.log("Obesidade");
+        return 'Obesidade';
     } else {
-        console.log("Valor de IMC inválido");
+        return 'Invalido';
     }
 }

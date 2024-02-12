@@ -1,0 +1,53 @@
+﻿@namespace ImcResultadoModal
+
+<section id="imcResultadoModal" class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
+    @switch (MessagemSelecionada)
+    {
+        case TipoMensagem.AbaixoDoPeso:
+            <h1 class="h1 h1Small">⛔ Abaixo do peso</h1>
+            <span>Você está abaixo do peso ideal, tem que comer mais feijão!</span>
+            break;
+        case TipoMensagem.PesoNormal:
+            <h1 class="h1 h1Small">✅ Parabéns!</h1>
+            <span>Você está no peso ideal, continue mantendo este estilo!</span>
+            break;
+        case TipoMensagem.Sobrepeso:
+            <h1 class="h1 h1Small">⛔ Sobrepeso!</h1>
+            <span>Cuidado você está com sobrepeso,  dê uma atenção para sua saúde</span>
+            break;
+        case TipoMensagem.Obesidade:
+            <h1 class="h1 h1Small">⛔ Obesidade!</h1>
+            <span>Muito cuidado, você esta muito acima do se peso ideal, está na hora de cortar o feijão por uma folha de alfaçe!</span>
+            break;
+        default:
+            <h1 class="h1 h1Small">⚠️ Algo deu errado!</h1>
+            <span>Os dados fornecido resultaram em um calculo invalido ou em uma faixa de IMC fora da curva. por favor tente novamente.</span>
+            break;
+    }
+    <div class="horizontalDivisor"></div>
+    <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
+    <button class="btn btnSecondary" @onclick="GoToHistory">Ver meu histórico</button>
+</section>
+
+@code {
+    [Parameter] public TipoMensagem MessagemSelecionada { get; set; }
+
+    private void RegisterMeasures()
+    {
+        // Lógica para registrar medidas
+    }
+
+    private void GoToHistory()
+    {
+        // Lógica para ir para o histórico
+    }
+
+    public enum TipoMensagem
+    {
+        AbaixoDoPeso,
+        PesoNormal,
+        Sobrepeso,
+        Obesidade,
+        Invalido
+    }
+}

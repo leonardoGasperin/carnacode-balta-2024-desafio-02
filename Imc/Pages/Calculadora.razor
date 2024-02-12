@@ -1,5 +1,8 @@
 ﻿@page "/calculadora"
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavManager
+@using ImcResultadoModal
+
 <PageTitle>Calculadora</PageTitle>
 
 <section id="calculadora" class="principalContainer principalContainerBigScreen principalContainerSmallScreen">
@@ -25,14 +28,23 @@
     <button class="btn btnSecondary" onclick="window.location.href='significado'">Entenda o cálculo</button>
 </section>
 
+@if (_showModal)
+{
+    <ResultadoImcModal MessagemSelecionada="@_messageType"/>
+}
+
 @code {
     private string Sexo { get; set; } = "";
     private float Altura { get; set; }
     private float Peso { get; set; }
     private bool isIdoso { get; set; }
+    private bool _showModal = false;
+    private ResultadoImcModal.TipoMensagem _messageType;
 
     private async Task CalculadoraImc()
     {
-        await JSRuntime.InvokeVoidAsync("calcularImc", Altura, Peso, Sexo, isIdoso);
+        string result = await JSRuntime.InvokeAsync<string>("calcularImc", Altura, Peso, Sexo, isIdoso);
+        _messageType = Enum.Parse<ResultadoImcModal.TipoMensagem>(result);
+        _showModal = true;
     }
 }
