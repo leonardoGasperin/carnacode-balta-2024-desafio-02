@@ -1,4 +1,6 @@
 ﻿@namespace ImcResultadoModal
+@inject IJSRuntime JSRuntime
+@using System.Text.Json
 
 <section id="imcResultadoModal" class="elementToFadeOut principalContainer principalContainerBigScreen principalContainerSmallScreen">
     @switch (MessagemSelecionada)
@@ -32,10 +34,21 @@
 
 @code {
     [Parameter] public TipoMensagem MessagemSelecionada { get; set; }
+    List<string> minhaLista = new List<string>();
 
-    private void RegisterMeasures()
+    private async Task RegisterMeasures()
     {
-        // Lógica para registrar medidas
+        var listaSalva = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "nome");
+
+        if (!string.IsNullOrEmpty(listaSalva))
+        {
+            minhaLista = JsonSerializer.Deserialize<List<string>>(listaSalva) ?? [];
+        }
+
+        minhaLista.AddRange(["item4", "item5", "item6"]);
+
+        string jsonLista = JsonSerializer.Serialize(minhaLista);
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "nome", jsonLista);
     }
 
     public enum TipoMensagem
