@@ -6,29 +6,32 @@
     @switch (MessagemSelecionada)
     {
         case TipoMensagem.AbaixoDoPeso:
-            <h1 class="h1 h1Small">⛔ Abaixo do peso</h1>
-            <span>Você está abaixo do peso ideal, tem que comer mais feijão!</span>
+            <h1 id="imcTitulo" class="h1 h1Small">⛔ Peso ideal</h1>
+            <span id="imcSpan">Você está abaixo do peso ideal, tem que comer mais feijão!</span>
             break;
         case TipoMensagem.PesoNormal:
-            <h1 class="h1 h1Small">✅ Parabéns!</h1>
-            <span>Você está no peso ideal, continue mantendo este estilo!</span>
+            <h1 id="imcTitulo" class="h1 h1Small">✅ Parabéns!</h1>
+            <span id="imcSpan">Você está no peso ideal, continue mantendo este estilo!</span>
             break;
         case TipoMensagem.Sobrepeso:
-            <h1 class="h1 h1Small">⛔ Sobrepeso!</h1>
-            <span>Cuidado você está com sobrepeso,  dê uma atenção para sua saúde</span>
+            <h1 id="imcTitulo" class="h1 h1Small">⛔ Sobrepeso!</h1>
+            <span id="imcSpan">Cuidado você está com sobrepeso,  dê uma atenção para sua saúde</span>
             break;
         case TipoMensagem.Obesidade:
-            <h1 class="h1 h1Small">⛔ Obesidade!</h1>
-            <span>Muito cuidado, você esta muito acima do se peso ideal, está na hora de cortar o feijão por uma folha de alfaçe!</span>
+            <h1 id="imcTitulo" class="h1 h1Small">⛔ Obesidade!</h1>
+            <span id="imcSpan">Muito cuidado, você esta muito acima do se peso ideal, está na hora de cortar o feijão por uma folha de alfaçe!</span>
             break;
         default:
-            <h1 class="h1 h1Small">⚠️ Algo deu errado!</h1>
-            <span>Os dados fornecido resultaram em um calculo invalido ou em uma faixa de IMC fora da curva. por favor tente novamente.</span>
+            <h1 id="imcTitulo" class="h1 h1Small">⚠️ Algo deu errado!</h1>
+            <span id="imcSpan">Os dados fornecido resultaram em um calculo invalido ou em uma faixa de IMC fora da curva. por favor tente novamente.</span>
             break;
     }
     <div class="horizontalDivisor"></div>
-    <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
-    <button class="btn btnSecondary" onclick="window.location.href='/historico'">Ver meu histórico</button>
+    @if (MessagemSelecionada != TipoMensagem.Invalido)
+    {
+        <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
+        <button class="btn btnSecondary" onclick="window.location.href='/historico'">Ver meu histórico</button>
+    }
     <button class="btn btnSecondary" onclick="window.location.href='/calculadora'">Voltar</button>
 </section>
 
@@ -38,17 +41,19 @@
 
     private async Task RegisterMeasures()
     {
-        var listaSalva = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "nome");
+        var listaSalva = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "listaHistorico");
 
         if (!string.IsNullOrEmpty(listaSalva))
         {
             minhaLista = JsonSerializer.Deserialize<List<string>>(listaSalva) ?? [];
         }
+        
+        var imcSave = await JSRuntime.InvokeAsync<string>("criaHistoricoComponente");
 
-        minhaLista.AddRange(["item4", "item5", "item6"]);
+        minhaLista.Add(imcSave);
 
         string jsonLista = JsonSerializer.Serialize(minhaLista);
-        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "nome", jsonLista);
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "listaHistorico", jsonLista);
     }
 
     public enum TipoMensagem
