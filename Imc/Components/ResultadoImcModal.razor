@@ -29,7 +29,7 @@
     <div class="horizontalDivisor"></div>
     @if (MessagemSelecionada != TipoMensagem.Invalido)
     {
-        <button class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
+        <button id="salvarImc" class="btn btnPrimary" @onclick="RegisterMeasures">Registrar medidas</button>
         <button class="btn btnSecondary" onclick="window.location.href='/historico'">Ver meu histórico</button>
     }
     <button class="btn btnSecondary" onclick="window.location.href='/calculadora'">Voltar</button>
@@ -47,13 +47,14 @@
         {
             minhaLista = JsonSerializer.Deserialize<List<string>>(listaSalva) ?? [];
         }
-        
+
         var imcSave = await JSRuntime.InvokeAsync<string>("criaHistoricoComponente");
 
         minhaLista.Add(imcSave);
 
         string jsonLista = JsonSerializer.Serialize(minhaLista);
         await JSRuntime.InvokeVoidAsync("localStorage.setItem", "listaHistorico", jsonLista);
+        await JSRuntime.InvokeVoidAsync("finalizaRegistro");
     }
 
     public enum TipoMensagem

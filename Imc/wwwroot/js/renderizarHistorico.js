@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
         `
         return divElement.outerHTML;
     }
+
+    window.finalizaRegistro = function () {
+        document.getElementById("salvarImc").style.display = 'none';
+    }
 });
 
 function formatarDataISO() {
