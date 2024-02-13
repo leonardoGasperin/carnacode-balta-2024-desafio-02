@@ -42,7 +42,3 @@ function formatarDataISO() {
 
     return dia + '/' + mes + '/' + ano;
 }
-
-//<div class="">
-    
-//</div>
