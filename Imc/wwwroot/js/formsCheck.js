@@ -34,3 +34,13 @@ window.checkingCadastroForms = function () {
         window.location.href = '/calculadora'
     }
 }
+
+window.chekingCalculoValores = function (altura, peso, sexo) {
+    if (altura <= 0 || peso <= 0) {
+        alert("Por favor, preencha todos os campos.");
+        return false;
+    }
+    else {
+        return true;
+    }
+}

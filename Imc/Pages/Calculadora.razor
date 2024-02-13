@@ -22,7 +22,7 @@
         <option value="feminino">Feminino</option>
     </select>
     <div>
-        <input type="checkbox" @bind="isIdoso" />
+        <input type="checkbox" @bind="IsIdoso" />
         <span>Eu tenho 65 anos ou mais</span>
     </div>
     <div class="horizontalDivisor"></div>
@@ -39,16 +39,20 @@
     private string Sexo { get; set; } = "";
     private float Altura { get; set; }
     private float Peso { get; set; }
-    private bool isIdoso { get; set; }
+    private bool IsIdoso { get; set; }
     private bool _showModal = false;
     private ResultadoImcModal.TipoMensagem _messageType;
 
     private async Task CalculadoraImc()
     {
-        float imcValor = await JSRuntime.InvokeAsync<float>("calcularImc", Altura, Peso);
-        string result = await JSRuntime.InvokeAsync<string>("imcResultado", imcValor, isIdoso, Sexo);
-        _messageType = Enum.Parse<ResultadoImcModal.TipoMensagem>(result);
-        await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent", "calculadora", "imcResultadoModal");
-        _showModal = true;
+        bool canCalcular = await JSRuntime.InvokeAsync<bool>("chekingCalculoValores", Altura, Peso);
+        if (canCalcular)
+        {
+            float imcValor = await JSRuntime.InvokeAsync<float>("calcularImc", Altura, Peso);
+            string result = await JSRuntime.InvokeAsync<string>("imcResultado", imcValor, IsIdoso, Sexo);
+            _messageType = Enum.Parse<ResultadoImcModal.TipoMensagem>(result);
+            await JSRuntime.InvokeVoidAsync("fadeOutAndShowMainContent", "calculadora", "imcResultadoModal");
+            _showModal = true;
+        }
     }
 }
